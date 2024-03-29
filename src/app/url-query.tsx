@@ -31,7 +31,7 @@ export default function UrlQuery() {
           <div className="w-full flex-1">
             <form onSubmit={onSubmit}>
               <div className="relative">
-                <LinkUrl className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <LinkUrl className="absolute left-2.5 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Enter a URL here..."
