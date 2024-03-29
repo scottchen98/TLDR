@@ -27,19 +27,23 @@ export function Dashboard({ query }: { query: string | undefined }) {
           </div>
           <div className="flex-1">
             <nav className="grid mt-4 items-start px-2 text-sm font-medium lg:px-4">
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-              >
-                <LinkUrl className="h-4 w-4" />
-                https://sst.dev
+              <Link href="#" className="min-w-full">
+                <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                  <span>
+                    <LinkUrl className="h-4 w-4" />
+                  </span>
+                  <span className="line-clamp-1">
+                    https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
+                  </span>
+                </p>
               </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-              >
-                <LinkUrl className="h-4 w-4" />
-                https://sst.dev
+              <Link href="#" className="min-w-full">
+                <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                  <span>
+                    <LinkUrl className="h-4 w-4" />
+                  </span>
+                  <span className="line-clamp-1">https://sst.dev</span>
+                </p>
               </Link>
             </nav>
           </div>
@@ -68,19 +72,23 @@ export function Dashboard({ query }: { query: string | undefined }) {
                   TLDR
                   <span className="sr-only">TLDR</span>
                 </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-                >
-                  <LinkUrl className="h-4 w-4" />
-                  https://sst.dev
+                <Link href="#" className="min-w-full">
+                  <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                    <span>
+                      <LinkUrl className="h-4 w-4" />
+                    </span>
+                    <span className="line-clamp-1">
+                      https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
+                    </span>
+                  </p>
                 </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-                >
-                  <LinkUrl className="h-4 w-4" />
-                  https://sst.dev
+                <Link href="#" className="min-w-full">
+                  <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                    <span>
+                      <LinkUrl className="h-4 w-4" />
+                    </span>
+                    <span className="line-clamp-1">https://sst.dev</span>
+                  </p>
                 </Link>
               </nav>
             </SheetContent>
