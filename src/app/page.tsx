@@ -1,3 +1,9 @@
-export default function HomePage() {
-  return <div>Hello World!</div>;
+import UrlSummarizer from "./url-summarizer";
+
+export default function DashboardPage() {
+  return (
+    <>
+      <UrlSummarizer />
+    </>
+  );
 }
