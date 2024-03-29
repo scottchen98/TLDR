@@ -10,8 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+
+import UrlSummarizer from "./url-summarizer";
 
 export function Dashboard() {
   return (
@@ -101,27 +102,8 @@ export function Dashboard() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <div className="flex flex-1 items-center justify-center">
-            <div className="flex flex-col items-center gap-3 text-center">
-              <h3 className="text-2xl font-bold tracking-tight">
-                Past a URL for a quick summary.
-              </h3>
-              <div className="w-full flex-1">
-                <form>
-                  <div className="relative">
-                    <LinkUrl className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      type="search"
-                      placeholder="Enter a URL here..."
-                      className="w-full appearance-none bg-background pl-8 shadow-none"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </main>
+
+        <UrlSummarizer />
       </div>
     </div>
   );

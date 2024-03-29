@@ -1,5 +1,6 @@
 import { fetchPageContent } from "./helpers";
 import ParseDocument from "./parse-document";
+import UrlQuery from "./url-query";
 
 export default async function UrlSummarizer() {
   const htmlString = await fetchPageContent(
@@ -7,8 +8,9 @@ export default async function UrlSummarizer() {
   );
 
   return (
-    <>
+    <div className="space-y-10">
+      <UrlQuery />
       <ParseDocument htmlString={htmlString} />
-    </>
+    </div>
   );
 }

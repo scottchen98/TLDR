@@ -27,9 +27,9 @@ export default function ParseDocument({ htmlString }: { htmlString: string }) {
   }, [htmlString]);
 
   return (
-    <>
+    <div>
       <h1>{article?.title}</h1>
       <p>{article?.textContent}</p>
-    </>
+    </div>
   );
 }
