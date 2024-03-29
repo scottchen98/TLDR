@@ -1,9 +1,9 @@
-import UrlSummarizer from "./url-summarizer";
+import { Dashboard } from "./dashboard";
 
 export default function DashboardPage() {
   return (
     <>
-      <UrlSummarizer />
+      <Dashboard />
     </>
   );
 }
