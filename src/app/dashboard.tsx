@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { CircleUser, Link as LinkUrl, Menu, ScrollText } from "lucide-react";
+import {
+  CircleUser,
+  Link as LinkUrl,
+  EllipsisVertical,
+  Menu,
+  ScrollText,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -28,21 +34,27 @@ export function Dashboard({ query }: { query: string | undefined }) {
           <div className="flex-1">
             <nav className="grid mt-4 items-start px-2 text-sm font-medium lg:px-4">
               <Link href="#" className="min-w-full">
-                <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
                   <span>
                     <LinkUrl className="h-4 w-4" />
                   </span>
                   <span className="line-clamp-1">
                     https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
                   </span>
+                  <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                    <EllipsisVertical className="h-4 w-4" />
+                  </span>
                 </p>
               </Link>
               <Link href="#" className="min-w-full">
-                <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
                   <span>
                     <LinkUrl className="h-4 w-4" />
                   </span>
                   <span className="line-clamp-1">https://sst.dev</span>
+                  <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                    <EllipsisVertical className="h-4 w-4" />
+                  </span>
                 </p>
               </Link>
             </nav>
@@ -73,21 +85,27 @@ export function Dashboard({ query }: { query: string | undefined }) {
                   <span className="sr-only">TLDR</span>
                 </Link>
                 <Link href="#" className="min-w-full">
-                  <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                  <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
                     <span>
                       <LinkUrl className="h-4 w-4" />
                     </span>
                     <span className="line-clamp-1">
                       https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
                     </span>
+                    <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                      <EllipsisVertical className="h-4 w-4" />
+                    </span>
                   </p>
                 </Link>
                 <Link href="#" className="min-w-full">
-                  <p className="flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+                  <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
                     <span>
                       <LinkUrl className="h-4 w-4" />
                     </span>
                     <span className="line-clamp-1">https://sst.dev</span>
+                    <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                      <EllipsisVertical className="h-4 w-4" />
+                    </span>
                   </p>
                 </Link>
               </nav>
