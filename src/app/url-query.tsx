@@ -5,20 +5,28 @@ import { Link as LinkUrl } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { isValidUrl } from "./helpers";
 
 export default function UrlQuery() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const [urlQuery, setUrlQuery] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!isValidUrl(urlQuery)) {
+      setErrorMessage("Invalid URL. Please try again.");
+      return;
+    }
+
     const params = new URLSearchParams(searchParams);
 
     urlQuery ? params.set("query", urlQuery) : params.delete("query");
     replace(`${pathname}?${params.toString()}`);
     setUrlQuery("");
+    setErrorMessage("");
   }
 
   return (
@@ -44,6 +52,9 @@ export default function UrlQuery() {
           </div>
         </div>
       </div>
+      {errorMessage && (
+        <p className="text-red-500 text-center">{errorMessage}</p>
+      )}
     </div>
   );
 }
