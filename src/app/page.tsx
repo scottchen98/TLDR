@@ -1,4 +1,4 @@
-import { Dashboard } from "./dashboard";
+import UrlSummarizer from "./url-summarizer";
 
 export default function DashboardPage({
   searchParams,
@@ -9,7 +9,7 @@ export default function DashboardPage({
 
   return (
     <>
-      <Dashboard query={query} />
+      <UrlSummarizer query={query} />
     </>
   );
 }
