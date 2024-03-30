@@ -1,18 +1,9 @@
-import { CircleUser, ScrollText } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { ScrollText } from "lucide-react";
 
 import Link from "next/link";
 import NavBarSheet from "@/components/nav-bar-sheet";
 import NavBar from "@/components/nav-bar";
+import Profile from "@/components/profile";
 import UrlSummarizer from "./url-summarizer";
 
 export function Dashboard({ query }: { query: string | undefined }) {
@@ -34,22 +25,7 @@ export function Dashboard({ query }: { query: string | undefined }) {
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <NavBarSheet />
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className="ml-auto">
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Update Profile Photo</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Profile />
         </header>
 
         <UrlSummarizer query={query} />
