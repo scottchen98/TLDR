@@ -8,7 +8,6 @@ import Profile from "@/components/profile";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import UrlQuery from "./url-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,10 +47,7 @@ export default function RootLayout({
               <Profile />
             </header>
 
-            <main>
-              <UrlQuery />
-              {children}
-            </main>
+            <main>{children}</main>
           </div>
         </div>
       </body>
