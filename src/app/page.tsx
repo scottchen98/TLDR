@@ -1,3 +1,4 @@
+import Greeting from "./greeting";
 import UrlSummarizer from "./url-summarizer";
 
 export default function HomePage({
@@ -7,9 +8,5 @@ export default function HomePage({
 }) {
   const { query } = searchParams;
 
-  return (
-    <>
-      <UrlSummarizer query={query} />
-    </>
-  );
+  return <>{query ? <UrlSummarizer query={query} /> : <Greeting />}</>;
 }
