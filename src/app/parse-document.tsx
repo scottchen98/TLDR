@@ -27,7 +27,7 @@ export default function ParseDocument({ htmlString }: { htmlString: string }) {
   }, [htmlString]);
 
   return (
-    <div className="space-y-4 px-8 pb-8">
+    <div className="space-y-4 px-8 py-8">
       <h1 className="font-bold text-2xl">{article?.title}</h1>
       <p className="text-pretty">{article?.textContent}</p>
     </div>
