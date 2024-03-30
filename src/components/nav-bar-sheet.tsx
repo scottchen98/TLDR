@@ -28,15 +28,15 @@ export default function NavBarSheet() {
       <SheetContent side="left" className="flex flex-col">
         <nav className="grid gap-2 text-lg font-medium">
           <Link
-            href="#"
-            className="flex items-center gap-2 text-lg font-semibold mb-5"
+            href="/"
+            className="mb-5 flex items-center gap-2 text-lg font-semibold"
           >
             <ScrollText className="h-6 w-6" />
             TLDR
             <span className="sr-only">TLDR</span>
           </Link>
           <Link href="#" className="min-w-full">
-            <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+            <p className="group flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary">
               <span>
                 <LinkUrl className="h-4 w-4" />
               </span>
@@ -44,10 +44,10 @@ export default function NavBarSheet() {
                 https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
               </span>
               <Popover>
-                <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                <PopoverTrigger className="invisible ml-auto rounded-full p-1 hover:bg-[#e1e4e8] group-hover:visible">
                   <EllipsisVertical className="h-4 w-4" />
                 </PopoverTrigger>
-                <PopoverContent className="w-fit py-3 flex items-center gap-2 relative left-[77%] bottom-10 shadow-lg">
+                <PopoverContent className="relative bottom-10 left-[77%] flex w-fit items-center gap-2 py-3 shadow-lg">
                   <Trash2 className="h-4 w-4" />
                   Delete
                 </PopoverContent>
@@ -55,7 +55,7 @@ export default function NavBarSheet() {
             </p>
           </Link>
           <Link href="#" className="min-w-full">
-            <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+            <p className="group flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary">
               <span>
                 <LinkUrl className="h-4 w-4" />
               </span>
@@ -63,10 +63,10 @@ export default function NavBarSheet() {
                 https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
               </span>
               <Popover>
-                <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                <PopoverTrigger className="invisible ml-auto rounded-full p-1 hover:bg-[#e1e4e8] group-hover:visible">
                   <EllipsisVertical className="h-4 w-4" />
                 </PopoverTrigger>
-                <PopoverContent className="w-fit py-3 flex items-center gap-2 relative left-[77%] bottom-10 shadow-lg">
+                <PopoverContent className="relative bottom-10 left-[77%] flex w-fit items-center gap-2 py-3 shadow-lg">
                   <Trash2 className="h-4 w-4" />
                   Delete
                 </PopoverContent>
