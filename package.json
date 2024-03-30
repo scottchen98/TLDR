@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:db": "turso dev --db-file dev.db",
+    "db:migrate": "drizzle-kit generate:sqlite",
+    "db:push": "drizzle-kit push:sqlite"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
