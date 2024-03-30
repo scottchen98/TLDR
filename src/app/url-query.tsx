@@ -33,7 +33,7 @@ export default function UrlQuery() {
     <div className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex flex-1 items-start justify-center">
         <div className="flex flex-col items-center gap-3 text-center">
-          <h3 className="text-2xl font-bold tracking-tight">
+          <h3 className="text-xl font-bold tracking-tight md:text-2xl">
             Past a URL for a quick summary.
           </h3>
           <div className="w-full flex-1">
@@ -53,7 +53,7 @@ export default function UrlQuery() {
         </div>
       </div>
       {errorMessage && (
-        <p className="text-red-500 text-center">{errorMessage}</p>
+        <p className="text-center text-red-500">{errorMessage}</p>
       )}
     </div>
   );
