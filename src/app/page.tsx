@@ -1,6 +1,6 @@
 import UrlSummarizer from "./url-summarizer";
 
-export default function DashboardPage({
+export default function HomePage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
