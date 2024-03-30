@@ -5,6 +5,7 @@ import {
   EllipsisVertical,
   Menu,
   ScrollText,
+  Trash2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 import UrlSummarizer from "./url-summarizer";
 
@@ -41,9 +47,15 @@ export function Dashboard({ query }: { query: string | undefined }) {
                   <span className="line-clamp-1">
                     https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
                   </span>
-                  <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
-                    <EllipsisVertical className="h-4 w-4" />
-                  </span>
+                  <Popover>
+                    <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                      <EllipsisVertical className="h-4 w-4" />
+                    </PopoverTrigger>
+                    <PopoverContent className="w-fit py-3 hidden md:flex md:items-center md:gap-2 md:relative lg:left-[88%] md:left-[80%] md:bottom-10 shadow-lg">
+                      <Trash2 className="h-4 w-4" />
+                      Delete
+                    </PopoverContent>
+                  </Popover>
                 </p>
               </Link>
               <Link href="#" className="min-w-full">
@@ -51,10 +63,18 @@ export function Dashboard({ query }: { query: string | undefined }) {
                   <span>
                     <LinkUrl className="h-4 w-4" />
                   </span>
-                  <span className="line-clamp-1">https://sst.dev</span>
-                  <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
-                    <EllipsisVertical className="h-4 w-4" />
+                  <span className="line-clamp-1">
+                    https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
                   </span>
+                  <Popover>
+                    <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                      <EllipsisVertical className="h-4 w-4" />
+                    </PopoverTrigger>
+                    <PopoverContent className="w-fit py-3 hidden md:flex md:items-center md:gap-2 md:relative lg:left-[88%] md:left-[80%] md:bottom-10 shadow-lg">
+                      <Trash2 className="h-4 w-4" />
+                      Delete
+                    </PopoverContent>
+                  </Popover>
                 </p>
               </Link>
             </nav>
@@ -92,9 +112,15 @@ export function Dashboard({ query }: { query: string | undefined }) {
                     <span className="line-clamp-1">
                       https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
                     </span>
-                    <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
-                      <EllipsisVertical className="h-4 w-4" />
-                    </span>
+                    <Popover>
+                      <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                        <EllipsisVertical className="h-4 w-4" />
+                      </PopoverTrigger>
+                      <PopoverContent className="w-fit py-3 flex items-center gap-2 relative left-[77%] bottom-10 shadow-lg">
+                        <Trash2 className="h-4 w-4" />
+                        Delete
+                      </PopoverContent>
+                    </Popover>
                   </p>
                 </Link>
                 <Link href="#" className="min-w-full">
@@ -102,10 +128,18 @@ export function Dashboard({ query }: { query: string | undefined }) {
                     <span>
                       <LinkUrl className="h-4 w-4" />
                     </span>
-                    <span className="line-clamp-1">https://sst.dev</span>
-                    <span className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
-                      <EllipsisVertical className="h-4 w-4" />
+                    <span className="line-clamp-1">
+                      https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
                     </span>
+                    <Popover>
+                      <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
+                        <EllipsisVertical className="h-4 w-4" />
+                      </PopoverTrigger>
+                      <PopoverContent className="w-fit py-3 flex items-center gap-2 relative left-[77%] bottom-10 shadow-lg">
+                        <Trash2 className="h-4 w-4" />
+                        Delete
+                      </PopoverContent>
+                    </Popover>
                   </p>
                 </Link>
               </nav>
