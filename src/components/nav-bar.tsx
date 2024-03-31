@@ -2,12 +2,12 @@ import { Plus, Link as LinkUrl } from "lucide-react";
 
 import Link from "next/link";
 
-import { getCurrentUserWebpages } from "@/db/queries/webpages";
 import DeleteLink from "./delete-link";
 import { Button } from "./ui/button";
+import { getCurrentUserWebpages } from "@/app/actions";
 
 export default async function NavBar() {
-  const pages = await getCurrentUserWebpages.all({ userId: "1" });
+  const pages = await getCurrentUserWebpages("1");
 
   return (
     <nav className="mt-4 grid items-start px-2 text-sm font-medium lg:px-4">
