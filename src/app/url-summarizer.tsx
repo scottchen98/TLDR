@@ -13,7 +13,9 @@ export default async function UrlSummarizer({
 
   return (
     <div className="space-y-10">
-      {htmlString && <ParseDocument htmlString={htmlString} />}
+      {htmlString && query && (
+        <ParseDocument htmlString={htmlString} url={query} />
+      )}
     </div>
   );
 }
