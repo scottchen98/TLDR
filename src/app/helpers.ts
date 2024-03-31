@@ -1,3 +1,5 @@
+import { Readability } from "@mozilla/readability";
+
 export async function fetchPageContent(url: string) {
   const response = await fetch(url);
 
@@ -9,6 +11,13 @@ export async function fetchPageContent(url: string) {
   return htmlString;
 }
 
+export function extractArticleInformation(htmlString: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+  const article = new Readability(doc).parse();
+  return article;
+}
+
 export function isValidUrl(urlString: string) {
   const urlPattern = new RegExp(
     "^(https?:\\/\\/)?" + // validate protocol
@@ -17,7 +26,7 @@ export function isValidUrl(urlString: string) {
       "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
       "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
       "(\\#[-a-z\\d_]*)?$",
-    "i"
+    "i",
   ); // validate fragment locator
   return !!urlPattern.test(urlString);
 }
