@@ -19,8 +19,9 @@ import { handleDelete } from "@/app/actions";
 type DeleteLinkProps = {
   userId: string;
   id: number;
+  url: string;
 };
-export default function DeleteLink({ userId, id }: DeleteLinkProps) {
+export default function DeleteLink({ userId, id, url }: DeleteLinkProps) {
   return (
     <Dialog>
       <DialogTrigger
@@ -36,6 +37,7 @@ export default function DeleteLink({ userId, id }: DeleteLinkProps) {
             You&apos;ll no longer see this link here.
           </DialogDescription>
         </DialogHeader>
+        <p className="text-center text-blue-500 sm:text-left">{url}</p>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button

@@ -64,7 +64,7 @@ export default async function NavBarSheet() {
                   {page.url}
                 </span>
               </Link>
-              <DeleteLink userId={page.userId} id={page.id} />
+              <DeleteLink userId={page.userId} id={page.id} url={page.url} />
             </div>
           ))}
         </nav>
