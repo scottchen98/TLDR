@@ -1,35 +1,48 @@
 "use client";
 
-import { Readability } from "@mozilla/readability";
+import { SummarySkeleton } from "@/components/summary-skeleton";
 
 import { useEffect, useState } from "react";
+import { extractArticleInformation } from "./helpers";
+import { handleCreate as createWebpage } from "./actions";
 
-type Article = {
+type SummarizedPage = {
   title: string;
-  content: string;
-  textContent: string;
-  length: number;
-  excerpt: string;
-  byline: string;
-  dir: string;
-  siteName: string;
-  lang: string;
-  publishedTime: string;
+  summary: string;
 } | null;
-export default function ParseDocument({ htmlString }: { htmlString: string }) {
-  const [article, setArticle] = useState<Article>(null);
+export default function ParseDocument({
+  htmlString,
+  url,
+}: {
+  htmlString: string;
+  url: string;
+}) {
+  const [summarizedPage, setSummarizedPage] = useState<SummarizedPage>(null);
 
   useEffect(() => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlString, "text/html");
-    const article = new Readability(doc).parse();
-    setArticle(article);
-  }, [htmlString]);
+    async function createArticle() {
+      setSummarizedPage(null);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const article = extractArticleInformation(htmlString);
+      if (!article) return;
+      const newPage = await createWebpage({
+        userId: "1",
+        url,
+        title: article.title,
+        summary: article.textContent,
+      });
+      if (!newPage) return;
+      const { title, summary } = newPage;
+      setSummarizedPage({ title, summary });
+    }
+    createArticle();
+  }, [htmlString, url]);
 
+  if (!summarizedPage) return <SummarySkeleton />;
   return (
     <div className="space-y-4 px-8 py-8">
-      <h1 className="text-2xl font-bold">{article?.title}</h1>
-      <p className="text-pretty">{article?.textContent}</p>
+      <h1 className="text-2xl font-bold">{summarizedPage?.title}</h1>
+      <p className="text-pretty">{summarizedPage?.summary}</p>
     </div>
   );
 }
