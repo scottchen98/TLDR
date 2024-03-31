@@ -1,54 +1,34 @@
-import { EllipsisVertical, Link as LinkUrl, Trash2 } from "lucide-react";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Link as LinkUrl } from "lucide-react";
 
 import Link from "next/link";
 
-export default function NavBar() {
+import { getCurrentUserWebpages } from "@/db/queries/webpages";
+import DeleteLink from "./delete-link";
+
+export default async function NavBar() {
+  const pages = await getCurrentUserWebpages.all({ userId: "1" });
+
   return (
-    <nav className="grid mt-4 items-start px-2 text-sm font-medium lg:px-4">
-      <Link href="#" className="min-w-full">
-        <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
-          <span>
-            <LinkUrl className="h-4 w-4" />
-          </span>
-          <span className="line-clamp-1">
-            https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
-          </span>
-          <Popover>
-            <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
-              <EllipsisVertical className="h-4 w-4" />
-            </PopoverTrigger>
-            <PopoverContent className="w-fit py-3 hidden md:flex md:items-center md:gap-2 md:relative lg:left-[88%] md:left-[80%] md:bottom-10 shadow-lg">
-              <Trash2 className="h-4 w-4" />
-              Delete
-            </PopoverContent>
-          </Popover>
-        </p>
-      </Link>
-      <Link href="#" className="min-w-full">
-        <p className="flex items-center group gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
-          <span>
-            <LinkUrl className="h-4 w-4" />
-          </span>
-          <span className="line-clamp-1">
-            https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
-          </span>
-          <Popover>
-            <PopoverTrigger className="ml-auto invisible group-hover:visible p-1 rounded-full hover:bg-[#e1e4e8]">
-              <EllipsisVertical className="h-4 w-4" />
-            </PopoverTrigger>
-            <PopoverContent className="w-fit py-3 hidden md:flex md:items-center md:gap-2 md:relative lg:left-[88%] md:left-[80%] md:bottom-10 shadow-lg">
-              <Trash2 className="h-4 w-4" />
-              Delete
-            </PopoverContent>
-          </Popover>
-        </p>
-      </Link>
+    <nav className="mt-4 grid items-start px-2 text-sm font-medium lg:px-4">
+      {pages.map((page) => (
+        <div
+          key={page.url}
+          className="group relative min-w-full rounded-full py-2 pl-3 pr-10 text-muted-foreground transition-all hover:bg-muted hover:text-primary"
+        >
+          <Link
+            href={`/summary/${page.id}`}
+            className="flex items-center gap-3"
+          >
+            <span>
+              <LinkUrl className="h-4 w-4" />
+            </span>
+            <span className="line-clamp-1 overflow-hidden text-ellipsis">
+              {page.url}
+            </span>
+          </Link>
+          <DeleteLink userId={page.userId} id={page.id} />
+        </div>
+      ))}
     </nav>
   );
 }
