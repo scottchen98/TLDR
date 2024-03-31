@@ -25,9 +25,9 @@ export default function DeleteLink({ userId, id }: DeleteLinkProps) {
     <Dialog>
       <DialogTrigger
         asChild
-        className="invisible absolute right-2 top-[6px] z-20 ml-auto rounded-full p-1 hover:bg-[#e1e4e8] group-hover:visible"
+        className="visible absolute right-2 top-[8px] z-20 ml-auto rounded-full p-1 hover:bg-[#e1e4e8] group-hover:visible sm:invisible sm:top-[6px]"
       >
-        <EllipsisVertical className="h-6 w-6" />
+        <EllipsisVertical className="h-7 w-7 md:h-6 md:w-6" />
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

@@ -4,6 +4,7 @@ import {
   ScrollText,
   EllipsisVertical,
   Trash2,
+  Plus,
 } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -15,8 +16,12 @@ import {
 } from "@/components/ui/popover";
 
 import Link from "next/link";
+import { getCurrentUserWebpages } from "@/db/queries/webpages";
+import DeleteLink from "./delete-link";
 
-export default function NavBarSheet() {
+export default async function NavBarSheet() {
+  const pages = await getCurrentUserWebpages.all({ userId: "1" });
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -26,7 +31,7 @@ export default function NavBarSheet() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="flex flex-col">
-        <nav className="grid gap-2 text-lg font-medium">
+        <nav className="grid gap-1 text-lg font-medium">
           <Link
             href="/"
             className="mb-5 flex items-center gap-2 text-lg font-semibold"
@@ -35,44 +40,33 @@ export default function NavBarSheet() {
             TLDR
             <span className="sr-only">TLDR</span>
           </Link>
-          <Link href="#" className="min-w-full">
-            <p className="group flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary">
+          <Link href="/summary" className="my-5 h-10 w-[50%] rounded-full">
+            <Button className="w-full space-x-1 rounded-full bg-[#eeeeee] pr-[22px] text-sm text-[#b0b0b0] hover:cursor-pointer hover:bg-[#eeeeee]">
               <span>
-                <LinkUrl className="h-4 w-4" />
+                <Plus className="h-4 w-4 lg:h-5 lg:w-5" />
               </span>
-              <span className="line-clamp-1">
-                https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
-              </span>
-              <Popover>
-                <PopoverTrigger className="invisible ml-auto rounded-full p-1 hover:bg-[#e1e4e8] group-hover:visible">
-                  <EllipsisVertical className="h-4 w-4" />
-                </PopoverTrigger>
-                <PopoverContent className="relative bottom-10 left-[77%] flex w-fit items-center gap-2 py-3 shadow-lg">
-                  <Trash2 className="h-4 w-4" />
-                  Delete
-                </PopoverContent>
-              </Popover>
-            </p>
+              <span>New summary</span>
+            </Button>
           </Link>
-          <Link href="#" className="min-w-full">
-            <p className="group flex items-center gap-3 rounded-full px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary">
-              <span>
-                <LinkUrl className="h-4 w-4" />
-              </span>
-              <span className="line-clamp-1">
-                https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
-              </span>
-              <Popover>
-                <PopoverTrigger className="invisible ml-auto rounded-full p-1 hover:bg-[#e1e4e8] group-hover:visible">
-                  <EllipsisVertical className="h-4 w-4" />
-                </PopoverTrigger>
-                <PopoverContent className="relative bottom-10 left-[77%] flex w-fit items-center gap-2 py-3 shadow-lg">
-                  <Trash2 className="h-4 w-4" />
-                  Delete
-                </PopoverContent>
-              </Popover>
-            </p>
-          </Link>
+          {pages.map((page) => (
+            <div
+              key={page.url}
+              className="group relative min-w-full rounded-full py-2 pl-3 pr-10 text-muted-foreground transition-all hover:bg-muted hover:text-primary"
+            >
+              <Link
+                href={`/summary/${page.id}`}
+                className="flex items-center gap-3"
+              >
+                <span>
+                  <LinkUrl className="h-4 w-4" />
+                </span>
+                <span className="line-clamp-1 overflow-hidden text-ellipsis">
+                  {page.url}
+                </span>
+              </Link>
+              <DeleteLink userId={page.userId} id={page.id} />
+            </div>
+          ))}
         </nav>
       </SheetContent>
     </Sheet>
