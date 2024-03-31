@@ -21,7 +21,7 @@ export default async function NavBar() {
       </Link>
       {pages.map((page) => (
         <div
-          key={page.url}
+          key={page.id}
           className="group relative min-w-full rounded-full py-2 pl-3 pr-10 text-muted-foreground transition-all hover:bg-muted hover:text-primary"
         >
           <Link
