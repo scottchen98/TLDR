@@ -4,7 +4,7 @@ import { SummarySkeleton } from "@/components/summary-skeleton";
 
 import { useEffect, useState } from "react";
 import { extractArticleInformation } from "./helpers";
-import { handleCreate as createWebpage } from "./actions";
+import { summarizeTextAndCreateWebpage } from "./actions";
 
 type SummarizedPage = {
   title: string;
@@ -18,29 +18,37 @@ export default function ParseDocument({
   url: string;
 }) {
   const [summarizedPage, setSummarizedPage] = useState<SummarizedPage>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function createArticle() {
       setSummarizedPage(null);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setErrorMessage("");
+
       const article = extractArticleInformation(htmlString);
-      if (!article) return;
-      const newPage = await createWebpage({
-        userId: "1",
+      if (!article)
+        return setErrorMessage("Failed to extract article information");
+
+      const summarizedPage = await summarizeTextAndCreateWebpage(
+        article.textContent,
+        "1",
         url,
-        title: article.title,
-        summary: article.textContent,
-      });
-      if (!newPage) return;
-      const { title, summary } = newPage;
+        article.title,
+      );
+      if ("error" in summarizedPage)
+        return setErrorMessage(summarizedPage.error);
+
+      const { title, summary } = summarizedPage;
       setSummarizedPage({ title, summary });
     }
     createArticle();
   }, [htmlString, url]);
 
-  if (!summarizedPage) return <SummarySkeleton />;
+  if (!summarizedPage && !errorMessage) return <SummarySkeleton />;
+  if (errorMessage)
+    return <p className="text-center text-red-500">{errorMessage}</p>;
   return (
-    <div className="space-y-4 px-8 py-8">
+    <div className="mt-10 space-y-4 px-8 py-8">
       <h1 className="text-2xl font-bold">{summarizedPage?.title}</h1>
       <p className="text-pretty">{summarizedPage?.summary}</p>
     </div>

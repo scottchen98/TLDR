@@ -1,7 +1,7 @@
 "use server";
 
 import {
-  createWebpage,
+  createWebpage as createWebpageDb,
   deleteWebpage,
   getCurrentUserWebpages as getCurrentUserWebpagesDb,
 } from "@/db/queries/webpages";
@@ -13,7 +13,7 @@ export const getCurrentUserWebpages = async (userId: string) => {
   return await getCurrentUserWebpagesDb.all({ userId });
 };
 
-export const handleCreate = async ({
+export const createWebpage = async ({
   userId,
   url,
   title,
@@ -24,9 +24,9 @@ export const handleCreate = async ({
   title: string;
   summary: string;
 }) => {
-  const newPage = (await createWebpage.all({ userId, url, title, summary })).at(
-    0,
-  );
+  const newPage = (
+    await createWebpageDb.all({ userId, url, title, summary })
+  ).at(0);
   revalidatePath(`/summary/${newPage?.id}`);
   revalidatePath("/summary");
   return newPage;
@@ -37,4 +37,39 @@ export const handleDelete = async (userId: string, id: number) => {
   revalidatePath(`/summary/${id}`);
   revalidatePath("/summary");
   redirect("/summary");
+};
+
+export const summarizeText = async (data: { inputs: string }) => {
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/Falconsai/text_summarization",
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.HUGGINGFACE_API_TOKEN}`,
+      },
+      method: "POST",
+      body: JSON.stringify(data),
+    },
+  );
+  const result: { summary_text: string }[] = await response.json();
+  if (!result || !result[0]) return "";
+  const { summary_text } = result[0];
+  return summary_text.replaceAll(" .", ".");
+};
+
+export const summarizeTextAndCreateWebpage = async (
+  text: string,
+  userId: string,
+  url: string,
+  title: string,
+) => {
+  const textSummary = await summarizeText({ inputs: text });
+  if (!textSummary) return { error: "Failed to summarize text" };
+  const newWebpage = await createWebpage({
+    userId,
+    url,
+    title,
+    summary: textSummary,
+  });
+  if (!newWebpage) return { error: "Failed to create web page" };
+  return newWebpage;
 };
