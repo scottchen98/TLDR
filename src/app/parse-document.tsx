@@ -49,7 +49,9 @@ export default function ParseDocument({
     return <p className="text-center text-red-500">{errorMessage}</p>;
   return (
     <div className="mt-10 space-y-4 px-8 py-8">
-      <h1 className="text-2xl font-bold">{summarizedPage?.title}</h1>
+      <h1 className="text-2xl font-bold tracking-wide">
+        {summarizedPage?.title}
+      </h1>
       <p className="text-pretty">{summarizedPage?.summary}</p>
     </div>
   );
