@@ -41,7 +41,7 @@ export default function WebpageSummary({
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 text-2xl font-bold tracking-wide"
+        className="mt-10 text-2xl font-bold tracking-wide"
       >
         {title}
       </motion.h1>
@@ -53,7 +53,7 @@ export default function WebpageSummary({
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-3 text-pretty text-lg leading-snug text-foreground"
+        className="mt-5 text-pretty text-lg leading-snug text-foreground"
       >
         {summary}
       </motion.p>
