@@ -38,7 +38,7 @@ export const deleteWebpage = async (userId: string, id: number) => {
 
 export const summarizeText = async (data: { inputs: string }) => {
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/Falconsai/text_summarization",
+    "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
     {
       headers: {
         Authorization: `Bearer ${process.env.HUGGINGFACE_API_TOKEN}`,
