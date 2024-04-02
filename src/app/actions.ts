@@ -4,6 +4,7 @@ import {
   createWebpage as createWebpageDb,
   deleteWebpage as deleteWebpageDb,
   getCurrentUserWebpages as getCurrentUserWebpagesDb,
+  webpageExists,
 } from "@/db/queries/webpages";
 import { revalidatePath } from "next/cache";
 
@@ -58,15 +59,19 @@ export const summarizeTextAndCreateWebpage = async (
   url: string,
   title: string,
 ) => {
+  const webpage = (await webpageExists.all({ userId, url })).at(0);
+  if (webpage) return { error: "URL has already been summarized." };
+
   const textSummary = await summarizeText({ inputs: text });
-  if (!textSummary) return { error: "Failed to summarize text" };
+  if (!textSummary) return { error: "Failed to summarize text." };
+
   const newWebpage = await createWebpage({
     userId,
     url,
     title,
     summary: textSummary,
   });
-  if (!newWebpage) return { error: "Failed to create web page" };
+  if (!newWebpage) return { error: "Failed to create web page." };
   revalidatePath(`/summary/${newWebpage.id}`);
   revalidatePath("/summary");
   revalidatePath("/");

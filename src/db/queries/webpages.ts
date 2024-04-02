@@ -39,4 +39,13 @@ export const deleteWebpage = db
   )
   .prepare();
 
+export const webpageExists = baseQuery
+  .where(
+    and(
+      eq(webpages.userId, sql.placeholder("userId")),
+      eq(webpages.url, sql.placeholder("url")),
+    ),
+  )
+  .prepare();
+
 export type Webpages = Awaited<ReturnType<typeof baseQuery.all>>[0];
