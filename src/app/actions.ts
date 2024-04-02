@@ -6,7 +6,6 @@ import {
   getCurrentUserWebpages as getCurrentUserWebpagesDb,
 } from "@/db/queries/webpages";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export const getCurrentUserWebpages = async (userId: string) => {
   revalidatePath("/summary");
@@ -36,7 +35,6 @@ export const handleDelete = async (userId: string, id: number) => {
   await deleteWebpage.all({ userId, id });
   revalidatePath(`/summary/${id}`);
   revalidatePath("/summary");
-  redirect("/summary");
 };
 
 export const summarizeText = async (data: { inputs: string }) => {

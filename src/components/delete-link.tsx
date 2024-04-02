@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { useRouter } from "next/navigation";
 import { handleDelete } from "@/app/actions";
 
 type DeleteLinkProps = {
@@ -22,6 +23,8 @@ type DeleteLinkProps = {
   url: string;
 };
 export default function DeleteLink({ userId, id, url }: DeleteLinkProps) {
+  const { push } = useRouter();
+
   return (
     <Dialog>
       <DialogTrigger
@@ -44,7 +47,10 @@ export default function DeleteLink({ userId, id, url }: DeleteLinkProps) {
               type="button"
               variant="link"
               className="p-0 text-red-500"
-              onClick={() => handleDelete(userId, id)}
+              onClick={async () => {
+                await handleDelete(userId, id);
+                push("/summary");
+              }}
             >
               Delete
             </Button>
