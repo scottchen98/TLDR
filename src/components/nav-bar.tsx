@@ -12,7 +12,7 @@ export default async function NavBar() {
   return (
     <nav className="grid items-start px-2 text-sm font-medium md:mt-9 lg:mt-8 lg:px-4">
       <Link href="/summary" className="mb-6 h-10 w-[60%] rounded-full">
-        <Button className="w-full space-x-1 rounded-full bg-[#eeeeee] pr-[22px] text-xs text-[#b0b0b0] hover:cursor-pointer hover:bg-[#eeeeee] lg:space-x-2 lg:text-sm">
+        <Button className="w-full space-x-1 rounded-full bg-[#eeeeee] pr-[22px] text-xs text-[#b0b0b0] hover:cursor-pointer hover:bg-[#f3f3f3] lg:space-x-2 lg:text-sm">
           <span>
             <Plus className="h-4 w-4 lg:h-5 lg:w-5" />
           </span>

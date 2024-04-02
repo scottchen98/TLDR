@@ -29,7 +29,7 @@ export default async function NavBarSheet() {
             <span className="sr-only">TLDR</span>
           </Link>
           <Link href="/summary" className="my-5 h-10 w-[50%] rounded-full">
-            <Button className="w-full space-x-1 rounded-full bg-[#eeeeee] pr-[22px] text-sm text-[#b0b0b0] hover:cursor-pointer hover:bg-[#eeeeee]">
+            <Button className="w-full space-x-1 rounded-full bg-[#eeeeee] pr-[22px] text-sm text-[#b0b0b0] hover:cursor-pointer hover:bg-[#f3f3f3]">
               <span>
                 <Plus className="h-4 w-4 lg:h-5 lg:w-5" />
               </span>
