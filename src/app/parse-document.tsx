@@ -1,10 +1,12 @@
 "use client";
 
-import { SummarySkeleton } from "@/components/summary-skeleton";
+import { motion } from "framer-motion";
 
 import { useEffect, useState } from "react";
 import { extractArticleInformation } from "./helpers";
 import { summarizeTextAndCreateWebpage } from "./actions";
+import { SummarySkeleton } from "@/components/summary-skeleton";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 type SummarizedPage = {
   title: string;
@@ -49,10 +51,21 @@ export default function ParseDocument({
     return <p className="text-center text-red-500">{errorMessage}</p>;
   return (
     <div className="mt-10 space-y-4 px-8 py-8">
-      <h1 className="text-2xl font-bold tracking-wide">
+      <motion.h1
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{
+          duration: 1.2,
+          ease: "easeInOut",
+        }}
+        className="text-2xl font-bold tracking-wide"
+      >
         {summarizedPage?.title}
-      </h1>
-      <p className="text-pretty">{summarizedPage?.summary}</p>
+      </motion.h1>
+      <TextGenerateEffect
+        words={summarizedPage?.summary || ""}
+        className="font-normal"
+      />
     </div>
   );
 }
