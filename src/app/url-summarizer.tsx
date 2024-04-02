@@ -6,10 +6,13 @@ export default async function UrlSummarizer({
 }: {
   query: string | undefined;
 }) {
-  let htmlString;
+  let htmlString: { error: string } | string = "";
   if (query && isValidUrl(query)) {
     htmlString = await fetchPageContent(`${query}`);
   }
+
+  if (typeof htmlString === "object" && "error" in htmlString)
+    return <p className="text-center text-red-500">{htmlString.error}</p>;
 
   return (
     <div className="space-y-10">

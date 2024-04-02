@@ -4,7 +4,7 @@ export async function fetchPageContent(url: string) {
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    return { error: "Sorry, the URL doesn't exist." };
   }
 
   const htmlString = await response.text();
