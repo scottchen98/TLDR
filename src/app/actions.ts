@@ -25,9 +25,6 @@ export const createWebpage = async ({
   const newPage = (
     await createWebpageDb.all({ userId, url, title, summary })
   ).at(0);
-  revalidatePath(`/summary/${newPage?.id}`);
-  revalidatePath("/summary");
-  revalidatePath("/");
   return newPage;
 };
 
@@ -70,5 +67,8 @@ export const summarizeTextAndCreateWebpage = async (
     summary: textSummary,
   });
   if (!newWebpage) return { error: "Failed to create web page" };
+  revalidatePath(`/summary/${newWebpage.id}`);
+  revalidatePath("/summary");
+  revalidatePath("/");
   return newWebpage;
 };
