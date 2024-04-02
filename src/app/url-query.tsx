@@ -1,6 +1,7 @@
 "use client";
 
 import { Link as LinkUrl } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -32,7 +33,15 @@ export default function UrlQuery() {
   return (
     <div className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex flex-1 items-start justify-center">
-        <div className="flex flex-col items-center gap-3 text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="flex flex-col items-center gap-3 text-center"
+        >
           <h3 className="text-xl font-bold tracking-tight md:text-2xl">
             Past a URL for a quick summary.
           </h3>
@@ -50,7 +59,7 @@ export default function UrlQuery() {
               </div>
             </form>
           </div>
-        </div>
+        </motion.div>
       </div>
       {errorMessage && (
         <p className="text-center text-red-500">{errorMessage}</p>
