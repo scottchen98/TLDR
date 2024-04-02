@@ -15,7 +15,7 @@ export default function WebpageSummary({
   summary,
 }: WebpageSummaryProps) {
   return (
-    <div className="mt-4 px-8 py-8">
+    <div className="mt-2 px-8 py-8">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
