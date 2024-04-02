@@ -25,12 +25,16 @@ export const createWebpage = async ({
   const newPage = (
     await createWebpageDb.all({ userId, url, title, summary })
   ).at(0);
+  revalidatePath(`/summary/${newPage?.id}`);
+  revalidatePath("/summary");
   revalidatePath("/");
   return newPage;
 };
 
 export const deleteWebpage = async (userId: string, id: number) => {
   await deleteWebpageDb.all({ userId, id });
+  revalidatePath(`/summary/${id}`);
+  revalidatePath("/summary");
   revalidatePath("/");
 };
 
