@@ -18,7 +18,9 @@ export default async function LinkPage({ params }: { params: { id: string } }) {
         {page.url}
       </Link>
       <h1 className="mt-8 text-2xl font-bold tracking-wide">{page.title}</h1>
-      <p className="mt-3 text-pretty">{page.summary}</p>
+      <p className="mt-3 text-pretty text-lg leading-snug text-foreground">
+        {page.summary}
+      </p>
     </div>
   );
 }
