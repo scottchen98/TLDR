@@ -52,7 +52,7 @@ export default function UrlQuery() {
                 <Input
                   type="search"
                   placeholder="Enter a URL here..."
-                  className="w-full appearance-none bg-background pl-8 shadow-none"
+                  className="w-full appearance-none border-x-0 border-b-2 border-t-0 bg-background pl-8 shadow-none"
                   value={urlQuery}
                   onChange={(e) => setUrlQuery(e.target.value)}
                 />
