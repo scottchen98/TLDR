@@ -31,7 +31,7 @@ export default function UrlQuery() {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+    <div className="flex flex-col gap-4 px-4 pb-4 pt-9 lg:gap-6 lg:px-6 lg:pb-6 lg:pt-9">
       <div className="flex flex-1 items-start justify-center">
         <motion.div
           initial={{ opacity: 0 }}
