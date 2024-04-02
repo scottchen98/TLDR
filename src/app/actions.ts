@@ -2,13 +2,12 @@
 
 import {
   createWebpage as createWebpageDb,
-  deleteWebpage,
+  deleteWebpage as deleteWebpageDb,
   getCurrentUserWebpages as getCurrentUserWebpagesDb,
 } from "@/db/queries/webpages";
 import { revalidatePath } from "next/cache";
 
 export const getCurrentUserWebpages = async (userId: string) => {
-  revalidatePath("/summary");
   return await getCurrentUserWebpagesDb.all({ userId });
 };
 
@@ -31,8 +30,8 @@ export const createWebpage = async ({
   return newPage;
 };
 
-export const handleDelete = async (userId: string, id: number) => {
-  await deleteWebpage.all({ userId, id });
+export const deleteWebpage = async (userId: string, id: number) => {
+  await deleteWebpageDb.all({ userId, id });
   revalidatePath(`/summary/${id}`);
   revalidatePath("/summary");
 };

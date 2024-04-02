@@ -14,8 +14,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { deleteWebpage } from "@/app/actions";
 import { useRouter } from "next/navigation";
-import { handleDelete } from "@/app/actions";
 
 type DeleteLinkProps = {
   userId: string;
@@ -24,6 +24,12 @@ type DeleteLinkProps = {
 };
 export default function DeleteLink({ userId, id, url }: DeleteLinkProps) {
   const { push } = useRouter();
+
+  async function onDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+    await deleteWebpage(userId, id);
+    push("/summary");
+  }
 
   return (
     <Dialog>
@@ -47,10 +53,7 @@ export default function DeleteLink({ userId, id, url }: DeleteLinkProps) {
               type="button"
               variant="link"
               className="p-0 text-red-500"
-              onClick={async () => {
-                await handleDelete(userId, id);
-                push("/summary");
-              }}
+              onClick={onDelete}
             >
               Delete
             </Button>
