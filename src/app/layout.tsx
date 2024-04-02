@@ -42,10 +42,10 @@ export default function RootLayout({
             </div>
           </div>
           <div className="flex flex-col">
-            <header className="pl-3 pt-3">
+            <header className="pl-3 pt-3 md:p-0">
               <NavBarSheet />
             </header>
-            <main className="mt-[61px]">{children}</main>
+            <main>{children}</main>
           </div>
         </div>
       </body>
