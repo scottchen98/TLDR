@@ -1,5 +1,5 @@
 import { fetchPageContent, isValidUrl } from "./helpers";
-import ParseDocument from "./parse-document";
+import SummarizeDocument from "./summarize-document";
 
 export default async function UrlSummarizer({
   query,
@@ -14,7 +14,7 @@ export default async function UrlSummarizer({
   return (
     <div className="space-y-10">
       {htmlString && query && (
-        <ParseDocument htmlString={htmlString} url={query} />
+        <SummarizeDocument htmlString={htmlString} url={query} />
       )}
     </div>
   );

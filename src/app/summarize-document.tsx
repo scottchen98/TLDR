@@ -12,7 +12,7 @@ type SummarizedPage = {
   title: string;
   summary: string;
 } | null;
-export default function ParseDocument({
+export default function SummarizeDocument({
   htmlString,
   url,
 }: {
