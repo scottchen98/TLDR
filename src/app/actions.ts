@@ -9,6 +9,7 @@ import {
 import { revalidatePath } from "next/cache";
 
 export const getCurrentUserWebpages = async (userId: string) => {
+  revalidatePath("/summary");
   return await getCurrentUserWebpagesDb.all({ userId });
 };
 
@@ -23,9 +24,10 @@ export const createWebpage = async ({
   title: string;
   summary: string;
 }) => {
-  const newPage = (
-    await createWebpageDb.all({ userId, url, title, summary })
-  ).at(0);
+  const newPage = await createWebpageDb
+    .all({ userId, url, title, summary })
+    .then((res) => res[0]);
+  if (!newPage) return null;
   return newPage;
 };
 
@@ -59,7 +61,9 @@ export const summarizeTextAndCreateWebpage = async (
   url: string,
   title: string,
 ) => {
-  const webpage = (await webpageExists.all({ userId, url })).at(0);
+  const webpage = await webpageExists
+    .all({ userId, url })
+    .then((res) => res[0]);
   if (webpage) return { error: "URL has already been summarized." };
 
   const textSummary = await summarizeText({ inputs: text });
@@ -73,7 +77,6 @@ export const summarizeTextAndCreateWebpage = async (
   });
   if (!newWebpage) return { error: "Failed to create web page." };
   revalidatePath(`/summary/${newWebpage.id}`);
-  revalidatePath("/summary");
   revalidatePath("/");
   return newWebpage;
 };
