@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 
 import { useEffect, useState } from "react";
+import { useSummarizationStore } from "./summarization-store";
 import { extractArticleInformation } from "./helpers";
 import { summarizeTextAndCreateWebpage } from "./actions";
 import { SummarySkeleton } from "@/components/summary-skeleton";
@@ -21,15 +22,22 @@ export default function SummarizeDocument({
 }) {
   const [summarizedPage, setSummarizedPage] = useState<SummarizedPage>(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const setIsSummarizing = useSummarizationStore(
+    (state) => state.setIsSummarizing,
+  );
 
   useEffect(() => {
     async function createArticle() {
+      if (!htmlString) return;
       setSummarizedPage(null);
       setErrorMessage("");
+      setIsSummarizing(true);
 
       const article = extractArticleInformation(htmlString);
-      if (!article)
+      if (!article) {
+        setIsSummarizing(false);
         return setErrorMessage("Failed to extract article information");
+      }
 
       const summarizedPage = await summarizeTextAndCreateWebpage(
         article.textContent,
@@ -37,14 +45,17 @@ export default function SummarizeDocument({
         url,
         article.title,
       );
-      if ("error" in summarizedPage)
+      if ("error" in summarizedPage) {
+        setIsSummarizing(false);
         return setErrorMessage(summarizedPage.error);
+      }
 
       const { title, summary } = summarizedPage;
       setSummarizedPage({ title, summary });
+      setIsSummarizing(false);
     }
     createArticle();
-  }, [htmlString, url]);
+  }, [htmlString, url, setIsSummarizing]);
 
   if (!summarizedPage && !errorMessage) return <SummarySkeleton />;
   if (errorMessage)

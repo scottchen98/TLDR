@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { useSummarizationStore } from "./summarization-store";
 import { Input } from "@/components/ui/input";
 import { isValidUrl } from "./helpers";
 
@@ -14,6 +15,7 @@ export default function UrlQuery() {
   const { replace } = useRouter();
   const [urlQuery, setUrlQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const isSummarizing = useSummarizationStore((state) => state.isSummarizing);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,9 +54,10 @@ export default function UrlQuery() {
                 <Input
                   type="search"
                   placeholder="Enter a URL here..."
-                  className="w-full appearance-none border-x-0 border-b-2 border-t-0 bg-background pl-8 shadow-none"
+                  className={`w-full appearance-none border-x-0 border-b-2 border-t-0 bg-background pl-8 shadow-none ${isSummarizing ? "cursor-not-allowed" : ""}`}
                   value={urlQuery}
                   onChange={(e) => setUrlQuery(e.target.value)}
+                  disabled={isSummarizing}
                 />
               </div>
             </form>
