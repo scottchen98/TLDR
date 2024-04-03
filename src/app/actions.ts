@@ -67,7 +67,8 @@ export const summarizeTextAndCreateWebpage = async (
   if (webpage) return { error: "URL has already been summarized." };
 
   const textSummary = await summarizeText({ inputs: text });
-  if (!textSummary) return { error: "Failed to summarize text." };
+  if (!textSummary)
+    return { error: "Failed to summarize text. Please try again." };
 
   const newWebpage = await createWebpage({
     userId,
