@@ -39,18 +39,18 @@ export default function SummarizeDocument({
         return setErrorMessage("Failed to extract article information");
       }
 
-      const summarizedPage = await summarizeTextAndCreateWebpage(
+      const summaryResult = await summarizeTextAndCreateWebpage(
         article.textContent,
         "1",
         url,
         article.title,
       );
-      if ("error" in summarizedPage) {
+      if ("error" in summaryResult) {
         setIsSummarizing(false);
-        return setErrorMessage(summarizedPage.error);
+        return setErrorMessage(summaryResult.error);
       }
 
-      const { title, summary } = summarizedPage;
+      const { title, summary } = summaryResult;
       setSummarizedPage({ title, summary });
       setIsSummarizing(false);
     }
