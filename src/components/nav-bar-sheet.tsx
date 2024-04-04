@@ -2,6 +2,12 @@ import { Menu, Link as LinkUrl, ScrollText, Plus } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import Link from "next/link";
 import { getCurrentUserWebpages } from "@/db/queries/webpages";
@@ -40,29 +46,37 @@ export default async function NavBarSheet() {
           </div>
           <div className="mb-3 flex-1 overflow-y-auto">
             <nav className="grid gap-1 text-lg font-medium">
-              <div className="min-w-full overflow-auto">
+              <div className="overflow-auto">
                 {pages.map((page) => (
-                  <Link
-                    key={page.id}
-                    href={`/summary/${page.id}`}
-                    className="min-w-full"
-                  >
-                    <div className="group relative rounded-full py-2 pl-3 pr-10 text-muted-foreground transition-all hover:bg-muted hover:text-primary">
-                      <div className="flex items-center gap-3">
-                        <span>
-                          <LinkUrl className="h-4 w-4" />
-                        </span>
-                        <span className="line-clamp-1 overflow-hidden text-ellipsis">
-                          {page.url}
-                        </span>
-                      </div>
-                      <DeleteLink
-                        userId={page.userId}
-                        id={page.id}
-                        url={page.url}
-                      />
-                    </div>
-                  </Link>
+                  <TooltipProvider key={page.id}>
+                    <Tooltip>
+                      <TooltipTrigger className="w-full">
+                        <Link href={`/summary/${page.id}`}>
+                          <div className="group relative rounded-full py-2 pl-3 pr-10 text-muted-foreground transition-all hover:bg-muted hover:text-primary">
+                            <div className="flex items-center gap-3">
+                              <span>
+                                <LinkUrl className="h-4 w-4" />
+                              </span>
+                              <span className="line-clamp-1 overflow-hidden text-ellipsis">
+                                {page.url}
+                              </span>
+                            </div>
+                            <DeleteLink
+                              userId={page.userId}
+                              id={page.id}
+                              url={page.url}
+                            />
+                          </div>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent
+                        side="right"
+                        className="relative right-60 max-w-[350px] sm:right-28"
+                      >
+                        {page.title}
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 ))}
               </div>
             </nav>
