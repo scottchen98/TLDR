@@ -12,7 +12,7 @@ import { isValidUrl } from "./helpers";
 export default function UrlQuery() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const { replace, push } = useRouter();
   const [urlQuery, setUrlQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const isSummarizing = useSummarizationStore((state) => state.isSummarizing);
@@ -25,11 +25,12 @@ export default function UrlQuery() {
     }
 
     const params = new URLSearchParams(searchParams);
-
+    params.delete("from_summarizer");
     urlQuery ? params.set("query", urlQuery) : params.delete("query");
-    replace(`${pathname}?${params.toString()}`);
+
     setUrlQuery("");
     setErrorMessage("");
+    push(`/summary?${params.toString()}`);
   }
 
   return (
