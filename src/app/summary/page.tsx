@@ -1,4 +1,3 @@
-import UrlQuery from "../url-query";
 import UrlSummarizer from "../url-summarizer";
 
 export default function SummaryPage({
@@ -10,7 +9,6 @@ export default function SummaryPage({
 
   return (
     <>
-      <UrlQuery />
       <UrlSummarizer query={query} />
     </>
   );

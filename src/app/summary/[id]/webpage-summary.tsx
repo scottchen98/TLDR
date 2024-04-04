@@ -18,7 +18,7 @@ export default function WebpageSummary({
   fromSummarizer,
 }: WebpageSummaryProps) {
   return (
-    <div className="mt-2 px-8 py-8">
+    <div className="px-8 py-8">
       {fromSummarizer ? (
         <>
           <motion.div
