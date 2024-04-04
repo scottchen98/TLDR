@@ -7,10 +7,6 @@ import { summarizeTextAndCreateWebpage } from "./actions";
 import { SummarySkeleton } from "@/components/summary-skeleton";
 import { useRouter } from "next/navigation";
 
-type SummarizedPage = {
-  title: string;
-  summary: string;
-} | null;
 export default function SummarizeDocument({
   htmlString,
   url,
