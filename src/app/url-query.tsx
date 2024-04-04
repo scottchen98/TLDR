@@ -3,7 +3,7 @@
 import { Link as LinkUrl } from "lucide-react";
 import { motion } from "framer-motion";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useSummarizationStore } from "./summarization-store";
 import { Input } from "@/components/ui/input";
@@ -11,8 +11,7 @@ import { isValidUrl } from "./helpers";
 
 export default function UrlQuery() {
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace, push } = useRouter();
+  const { push } = useRouter();
   const [urlQuery, setUrlQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const isSummarizing = useSummarizationStore((state) => state.isSummarizing);
