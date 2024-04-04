@@ -1,5 +1,5 @@
-import Greeting from "./greeting";
+import Hero from "./hero";
 
 export default function HomePage() {
-  return <Greeting />;
+  return <Hero />;
 }
