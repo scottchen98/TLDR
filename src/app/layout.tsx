@@ -32,10 +32,12 @@ export default function RootLayout({
               <div className="mt-2 flex h-32 flex-col justify-center gap-12 px-4 md:px-2 lg:px-4">
                 <Link
                   href="/"
-                  className="hidden items-center gap-2 font-semibold md:flex"
+                  className="hidden w-fit items-center gap-2 font-semibold md:flex"
                 >
                   <ScrollText className="h-6 w-6" />
-                  <span className="text-lg">TLDR</span>
+                  <span className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-xl font-bold text-transparent">
+                    TLDR
+                  </span>
                 </Link>
                 <Link href="/summary" className="h-10 w-[60%] rounded-full">
                   <Button className="w-full space-x-1 rounded-full bg-[#eeeeee] pr-[22px] text-xs text-[#b0b0b0] hover:cursor-pointer hover:bg-[#f3f3f3] lg:space-x-2 lg:text-sm">
