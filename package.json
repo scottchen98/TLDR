@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@kinde-oss/kinde-auth-nextjs": "^2.2.3",
     "@libsql/client": "^0.6.0",
     "@mozilla/readability": "^0.5.0",
     "@radix-ui/react-accordion": "^1.1.2",
