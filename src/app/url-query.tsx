@@ -28,6 +28,7 @@ export default function UrlQuery() {
 
     // check if the URL is valid
     if (!isValidUrl(urlQuery)) {
+      setUrlQuery("");
       setErrorMessage("Invalid URL. Please try again.");
       replace(`/summary?${params.toString()}`);
       return;
