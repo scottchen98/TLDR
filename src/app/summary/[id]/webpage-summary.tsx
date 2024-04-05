@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { useSummarizationStore } from "@/app/summarization-store";
 
 type WebpageSummaryProps = {
   url: string;
@@ -17,6 +19,14 @@ export default function WebpageSummary({
   summary,
   fromSummarizer,
 }: WebpageSummaryProps) {
+  const setErrorMessage = useSummarizationStore(
+    (state) => state.setErrorMessage,
+  );
+
+  useEffect(() => {
+    setErrorMessage("");
+  }, [setErrorMessage]);
+
   return (
     <div className="px-8 py-8">
       {fromSummarizer ? (
