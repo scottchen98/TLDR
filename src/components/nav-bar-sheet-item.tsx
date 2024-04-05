@@ -49,10 +49,7 @@ export default function NavBarSheetItem({ webpage }: { webpage: Webpage }) {
             </div>
           </Link>
         </TooltipTrigger>
-        <TooltipContent
-          side="right"
-          className="relative right-60 max-w-[350px] sm:right-28"
-        >
+        <TooltipContent className="relative left-24 top-[10px] max-w-[350px] sm:left-40">
           {webpage.title}
         </TooltipContent>
       </Tooltip>
