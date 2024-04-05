@@ -2,10 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-
-export default function Greeting() {
+export default function Hero({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-dvh flex-col items-center justify-center">
       <div className="flex flex-col gap-3 text-center text-5xl font-semibold md:text-6xl lg:text-7xl">
@@ -33,19 +30,7 @@ export default function Greeting() {
         }}
         className="mt-9 space-x-5"
       >
-        <Link href="/summary">
-          <Button
-            variant="outline"
-            className="h-9 w-28 text-xs md:h-10 md:w-32 md:text-sm"
-          >
-            Sign in
-          </Button>
-        </Link>
-        <Link href="/summary">
-          <Button className="h-9 w-28 text-xs md:h-10 md:w-32 md:text-sm">
-            Sign up
-          </Button>
-        </Link>
+        {children}
       </motion.div>
     </div>
   );
