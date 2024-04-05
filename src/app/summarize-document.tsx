@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSummarizationStore } from "./summarization-store";
 import { extractArticleInformation, summarizeText } from "./helpers";
-import { createWebpage, webpageExists } from "./actions";
+import { createWebpage } from "./actions";
 import { SummarySkeleton } from "@/components/summary-skeleton";
 import { useRouter } from "next/navigation";
 
@@ -14,8 +14,11 @@ export default function SummarizeDocument({
   htmlString: string;
   url: string;
 }) {
-  const [errorMessage, setErrorMessage] = useState("");
   const isSummarizing = useSummarizationStore((state) => state.isSummarizing);
+  const errorMessage = useSummarizationStore((state) => state.errorMessage);
+  const setErrorMessage = useSummarizationStore(
+    (state) => state.setErrorMessage,
+  );
   const setIsSummarizing = useSummarizationStore(
     (state) => state.setIsSummarizing,
   );
@@ -23,28 +26,27 @@ export default function SummarizeDocument({
 
   useEffect(() => {
     async function createArticle() {
-      if (!htmlString) return;
-      setErrorMessage("");
-
-      // check if the article is already summarized
-      const isWebpageExist = await webpageExists("1", url);
-      if (isWebpageExist)
-        return setErrorMessage("URL has already been summarized.");
+      if (!htmlString && !url) return;
 
       // begin summarizing the article
+      setErrorMessage("");
       setIsSummarizing(true);
+
+      // extract article information
       const article = extractArticleInformation(htmlString);
       if (!article) {
         setIsSummarizing(false);
         return setErrorMessage("Failed to extract article information");
       }
 
+      // summarize the article
       const summarizedText = await summarizeText(article.textContent);
       if (summarizedText.error) {
         setIsSummarizing(false);
         return setErrorMessage(summarizedText.error);
       }
 
+      // save to database
       const savedWebpage = await createWebpage({
         userId: "1",
         url,
@@ -60,10 +62,8 @@ export default function SummarizeDocument({
       push(`/summary/${savedWebpage.id}?from_summarizer=true`);
     }
     createArticle();
-  }, [htmlString, url, setIsSummarizing, push]);
+  }, [htmlString, url, setIsSummarizing, push, setErrorMessage]);
 
   if (htmlString && url && isSummarizing && !errorMessage)
     return <SummarySkeleton />;
-  if (errorMessage)
-    return <p className="text-center text-red-500">{errorMessage}</p>;
 }

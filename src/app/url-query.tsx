@@ -8,24 +8,44 @@ import { useState } from "react";
 import { useSummarizationStore } from "./summarization-store";
 import { Input } from "@/components/ui/input";
 import { isValidUrl } from "./helpers";
+import { webpageExists } from "./actions";
 
 export default function UrlQuery() {
   const searchParams = useSearchParams();
-  const { push } = useRouter();
+  const { replace, push } = useRouter();
   const [urlQuery, setUrlQuery] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const isSummarizing = useSummarizationStore((state) => state.isSummarizing);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const isSummarizing = useSummarizationStore((state) => state.isSummarizing);
+  const errorMessage = useSummarizationStore((state) => state.errorMessage);
+  const setErrorMessage = useSummarizationStore(
+    (state) => state.setErrorMessage,
+  );
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const params = new URLSearchParams(searchParams);
+    params.delete("from_summarizer");
+
+    // check if the URL is valid
     if (!isValidUrl(urlQuery)) {
       setErrorMessage("Invalid URL. Please try again.");
+      replace(`/summary?${params.toString()}`);
       return;
     }
 
-    const params = new URLSearchParams(searchParams);
-    params.delete("from_summarizer");
-    urlQuery ? params.set("query", urlQuery) : params.delete("query");
+    if (urlQuery) {
+      // check if the webpage has already been summarized
+      const isWebpageExist = await webpageExists("1", urlQuery);
+      if (isWebpageExist) {
+        setUrlQuery("");
+        setErrorMessage("URL has already been summarized.");
+        replace(`/summary?${params.toString()}`);
+        return;
+      }
+      params.set("query", urlQuery);
+    } else {
+      params.delete("query");
+    }
 
     setUrlQuery("");
     setErrorMessage("");
