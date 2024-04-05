@@ -30,3 +30,16 @@ export function isValidUrl(urlString: string) {
   ); // validate fragment locator
   return !!urlPattern.test(urlString);
 }
+
+export async function summarizeText(text: string) {
+  const res = await fetch("/api/summarization", {
+    method: "POST",
+    body: JSON.stringify({ text }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if ("error" in data) return { error: data.error };
+  return data.summarizedText;
+}

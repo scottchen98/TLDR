@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useSummarizationStore } from "./summarization-store";
-import { extractArticleInformation } from "./helpers";
-import { summarizeTextAndCreateWebpage } from "./actions";
+import { extractArticleInformation, summarizeText } from "./helpers";
+import { createWebpage, webpageExists } from "./actions";
 import { SummarySkeleton } from "@/components/summary-skeleton";
 import { useRouter } from "next/navigation";
 
@@ -25,27 +25,39 @@ export default function SummarizeDocument({
     async function createArticle() {
       if (!htmlString) return;
       setErrorMessage("");
-      setIsSummarizing(true);
 
+      // check if the article is already summarized
+      const isWebpageExist = await webpageExists("1", url);
+      if (isWebpageExist)
+        return setErrorMessage("URL has already been summarized.");
+
+      // begin summarizing the article
+      setIsSummarizing(true);
       const article = extractArticleInformation(htmlString);
       if (!article) {
         setIsSummarizing(false);
         return setErrorMessage("Failed to extract article information");
       }
 
-      const summaryResult = await summarizeTextAndCreateWebpage(
-        article.textContent,
-        "1",
-        url,
-        article.title,
-      );
-      if ("error" in summaryResult) {
+      const summarizedText = await summarizeText(article.textContent);
+      if (summarizedText.error) {
         setIsSummarizing(false);
-        return setErrorMessage(summaryResult.error);
+        return setErrorMessage(summarizedText.error);
+      }
+
+      const savedWebpage = await createWebpage({
+        userId: "1",
+        url,
+        title: article.title,
+        summary: summarizedText,
+      });
+      if ("error" in savedWebpage) {
+        setIsSummarizing(false);
+        return setErrorMessage(savedWebpage.error);
       }
 
       setIsSummarizing(false);
-      push(`/summary/${summaryResult.id}?from_summarizer=true`);
+      push(`/summary/${savedWebpage.id}?from_summarizer=true`);
     }
     createArticle();
   }, [htmlString, url, setIsSummarizing, push]);
