@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Button } from "@/components/ui/button";
+import Profile from "@/components/profile";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,9 +49,7 @@ export default function RootLayout({
               <div className="mb-3 flex-1 overflow-y-auto">
                 <NavBar />
               </div>
-              <Link href="" className="mx-auto mb-8 w-[80%]">
-                <Button className="w-full">Logout</Button>
-              </Link>
+              <Profile />
             </div>
           </div>
           <div className="flex flex-col">

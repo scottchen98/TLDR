@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getCurrentUserWebpages } from "@/db/queries/webpages";
 import NavBarSheetItem from "./nav-bar-sheet-item";
+import Profile from "./profile";
 
 export default async function NavBarSheet() {
   const pages = await getCurrentUserWebpages.all({ userId: "1" });
@@ -47,9 +48,7 @@ export default async function NavBarSheet() {
               </div>
             </nav>
           </div>
-          <Link href="" className="m-auto mb-2 w-full">
-            <Button className="w-full">Logout</Button>
-          </Link>
+          <Profile className="m-auto mb-2 w-full" />
         </div>
       </SheetContent>
     </Sheet>
