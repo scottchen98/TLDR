@@ -31,7 +31,7 @@ export default function NavBarSheetItem({ webpage }: { webpage: Webpage }) {
         <TooltipTrigger className="w-full">
           <Link href={`/summary/${webpage.id}`}>
             <div
-              className={`group relative rounded-full py-2 pl-3 pr-10 text-muted-foreground transition-all hover:bg-muted hover:text-primary ${isActive ? "bg-muted text-primary" : ""}`}
+              className={`group relative rounded-full py-2 pl-3 pr-10 transition-all ${isActive ? "hover:[#d4e0ed] bg-[#d4e0ed] text-primary" : "text-muted-foreground hover:bg-muted hover:text-primary"}`}
             >
               <div className="flex items-center gap-3">
                 <span>
@@ -45,6 +45,7 @@ export default function NavBarSheetItem({ webpage }: { webpage: Webpage }) {
                 userId={webpage.userId}
                 id={webpage.id}
                 url={webpage.url}
+                isActive={isActive}
               />
             </div>
           </Link>

@@ -21,8 +21,14 @@ type DeleteLinkProps = {
   userId: string;
   id: number;
   url: string;
+  isActive: boolean;
 };
-export default function DeleteLink({ userId, id, url }: DeleteLinkProps) {
+export default function DeleteLink({
+  userId,
+  id,
+  url,
+  isActive,
+}: DeleteLinkProps) {
   const { push } = useRouter();
 
   async function onDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -35,7 +41,7 @@ export default function DeleteLink({ userId, id, url }: DeleteLinkProps) {
     <Dialog>
       <DialogTrigger
         asChild
-        className="visible absolute right-2 top-[8px] z-20 ml-auto rounded-full p-1 hover:bg-[#e1e4e8] group-hover:visible md:invisible md:top-[6px]"
+        className={`visible absolute right-2 top-[8px] z-20 ml-auto rounded-full p-1 ${isActive ? "hover:bg-[#f5f7f9]" : "hover:bg-[#e1e4e8]"} group-hover:visible md:invisible md:top-[6px]`}
       >
         <EllipsisVertical className="h-7 w-7 md:h-6 md:w-6" />
       </DialogTrigger>
