@@ -1,12 +1,18 @@
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import {
   RegisterLink,
   LoginLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Hero from "./hero";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { isAuthenticated } = getKindeServerSession();
+  const isAuth = await isAuthenticated();
+  if (isAuth) return redirect("/summary");
+
   return (
     <Hero>
       <LoginLink postLoginRedirectURL="/summary">
