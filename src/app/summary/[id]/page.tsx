@@ -11,12 +11,15 @@ export default async function LinkPage({
   params: { id: string };
   searchParams: { [key: string]: string | undefined };
 }) {
-  const { isAuthenticated } = getKindeServerSession();
+  const { isAuthenticated, getUser } = getKindeServerSession();
   const isAuth = await isAuthenticated();
-  if (!isAuth) return redirect("/");
+  const sessionUser = await getUser();
+  if (!isAuth || !sessionUser) return redirect("/");
 
   const { id } = params;
-  const page = (await getWebpage.all({ userId: "1", id: parseInt(id) })).at(0);
+  const page = (
+    await getWebpage.all({ userId: sessionUser.id, id: parseInt(id) })
+  ).at(0);
   if (!page) notFound();
 
   const { from_summarizer: fromSummarizer } = searchParams;

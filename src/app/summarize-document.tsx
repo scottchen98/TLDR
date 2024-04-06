@@ -1,5 +1,7 @@
 "use client";
 
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+
 import { useEffect } from "react";
 import { useSummarizationStore } from "./summarization-store";
 import { extractArticleInformation, summarizeText } from "./helpers";
@@ -23,9 +25,14 @@ export default function SummarizeDocument({
     (state) => state.setIsSummarizing,
   );
   const { push } = useRouter();
+  const { user } = useKindeBrowserClient();
 
   useEffect(() => {
     async function createArticle() {
+      if (!user) {
+        setIsSummarizing(false);
+        return setErrorMessage("User is not authenticated.");
+      }
       if (!htmlString && !url) return;
 
       // begin summarizing the article
@@ -36,7 +43,7 @@ export default function SummarizeDocument({
       const article = extractArticleInformation(htmlString);
       if (!article) {
         setIsSummarizing(false);
-        return setErrorMessage("Failed to extract article information");
+        return setErrorMessage("Failed to extract article information.");
       }
 
       // summarize the article
@@ -48,7 +55,7 @@ export default function SummarizeDocument({
 
       // save to database
       const savedWebpage = await createWebpage({
-        userId: "1",
+        userId: user.id,
         url,
         title: article.title,
         summary: summarizedText,
@@ -62,7 +69,7 @@ export default function SummarizeDocument({
       push(`/summary/${savedWebpage.id}?from_summarizer=true`);
     }
     createArticle();
-  }, [htmlString, url, setIsSummarizing, push, setErrorMessage]);
+  }, [htmlString, url, setIsSummarizing, push, user, setErrorMessage]);
 
   if (htmlString && url && isSummarizing && !errorMessage)
     return <SummarySkeleton />;

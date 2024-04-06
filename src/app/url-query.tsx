@@ -2,6 +2,7 @@
 
 import { Link as LinkUrl } from "lucide-react";
 import { motion } from "framer-motion";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -14,6 +15,7 @@ export default function UrlQuery() {
   const searchParams = useSearchParams();
   const { replace, push } = useRouter();
   const [urlQuery, setUrlQuery] = useState("");
+  const { user } = useKindeBrowserClient();
 
   const isSummarizing = useSummarizationStore((state) => state.isSummarizing);
   const errorMessage = useSummarizationStore((state) => state.errorMessage);
@@ -23,6 +25,7 @@ export default function UrlQuery() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     const params = new URLSearchParams(searchParams);
     params.delete("from_summarizer");
 
@@ -36,7 +39,8 @@ export default function UrlQuery() {
 
     if (urlQuery) {
       // check if the webpage has already been summarized
-      const isWebpageExist = await webpageExists("1", urlQuery);
+      if (!user) return;
+      const isWebpageExist = await webpageExists(user.id, urlQuery);
       if (isWebpageExist) {
         setUrlQuery("");
         setErrorMessage("URL has already been summarized.");
@@ -53,6 +57,7 @@ export default function UrlQuery() {
     push(`/summary?${params.toString()}`);
   }
 
+  if (!user) return push("/");
   return (
     <div className="mt-[76px] flex flex-col gap-4 px-4 pb-4 md:p-6 lg:gap-6">
       <div className="flex flex-1 items-start justify-center">
