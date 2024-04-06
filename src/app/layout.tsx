@@ -59,7 +59,7 @@ export default async function RootLayout({
             </div>
           </div>
           <div className={`flex flex-col ${!isAuth ? "w-dvw" : ""}`}>
-            <header className="pl-3 pt-3 md:p-0">
+            <header className="fixed pl-3 pt-3 md:p-0">
               <NavBarSheet />
             </header>
             <main>{children}</main>
