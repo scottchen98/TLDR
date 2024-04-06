@@ -1,12 +1,10 @@
-import Link from "next/link";
+import { Frown } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="mx-auto mt-[103px] flex flex-col items-center gap-4">
-      <h2 className="text-2xl">Summary Not Found</h2>
-      <Link href="/" className="text-blue-500 hover:underline">
-        Return Home
-      </Link>
+    <div className="mx-auto mt-8 flex flex-col items-center gap-4 text-muted-foreground">
+      <Frown className="h-16 w-16" />
+      <h2 className="text-2xl font-medium">Summary Not Found</h2>
     </div>
   );
 }
