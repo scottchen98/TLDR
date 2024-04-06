@@ -28,7 +28,7 @@ export default async function NavBarSheet() {
         <div className="flex h-full max-h-dvh flex-col gap-2 pt-2">
           <div className="mt-2 flex h-28 flex-col justify-center gap-8">
             <Link
-              href="/"
+              href="/summary"
               className="mb-0 flex items-center gap-2 text-lg font-semibold"
             >
               <ScrollText className="h-6 w-6" />

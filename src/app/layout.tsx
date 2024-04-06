@@ -35,7 +35,7 @@ export default async function RootLayout({
             <div className="flex h-full max-h-dvh flex-col gap-2 pt-2">
               <div className="mt-2 flex h-32 flex-col justify-center gap-12 px-4 md:px-2 lg:px-4">
                 <Link
-                  href="/"
+                  href="/summary"
                   className="hidden w-fit items-center gap-2 font-semibold md:flex"
                 >
                   <ScrollText className="h-6 w-6" />
