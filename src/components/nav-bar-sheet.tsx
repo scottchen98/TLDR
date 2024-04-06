@@ -1,4 +1,5 @@
 import { Menu, ScrollText, Plus } from "lucide-react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,11 @@ import NavBarSheetItem from "./nav-bar-sheet-item";
 import Profile from "./profile";
 
 export default async function NavBarSheet() {
-  const pages = await getCurrentUserWebpages.all({ userId: "1" });
+  const { getUser } = getKindeServerSession();
+  const sessionUser = await getUser();
+  if (!sessionUser) return;
+
+  const pages = await getCurrentUserWebpages.all({ userId: sessionUser.id });
 
   return (
     <Sheet>
@@ -27,7 +32,9 @@ export default async function NavBarSheet() {
               className="mb-0 flex items-center gap-2 text-lg font-semibold"
             >
               <ScrollText className="h-6 w-6" />
-              TLDR
+              <span className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-xl font-bold text-transparent">
+                TLDR
+              </span>
               <span className="sr-only">TLDR</span>
             </Link>
             <Link href="/summary" className="my-5 h-10 w-[50%] rounded-full">
