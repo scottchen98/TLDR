@@ -11,7 +11,7 @@ TLDR is a web application designed to combat information overload by leveraging 
 
 ## Tech Stack
 
-**Frontend:** React, Shadcn UI \
+**Frontend:** React, Tailwind, Shadcn UI \
 **Backend:** Next.js, Drizzle ORM, Turso \
 **Authentication:** Kinde \
 **AI Summarization:** BART model (Facebook) running on Edge Functions
@@ -22,11 +22,11 @@ TLDR is targeted towards anyone overwhelmed by information overload. Busy profes
 
 ## Key Features
 
-### URL-based summarization
+### URL-based Summarization
 
 - Simply provide a URL, and TLDR takes care of the rest, eliminating the need to copy and paste potentially irrelevant text or images.
 
-### AI-powered summaries
+### AI-powered Summaries
 
 - TLDR utilizes Facebook's BART model to generate accurate and informative summaries, capturing the webpage's essence and saving you valuable reading time.
 
