@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   title: "TLDR",
   description:
     "TLDR a web app that helps you quickly grasp the key points of any webpage. Simply paste a URL, and TLDR will extract the main content and provide you with a concise summary.",
+  openGraph: {
+    images: "https://url-tldr.vercel.app/og.png",
+    url: "https://url-tldr.vercel.app",
+  },
 };
 
 export default async function RootLayout({
