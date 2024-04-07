@@ -29,10 +29,7 @@ export default function SummarizeDocument({
 
   useEffect(() => {
     async function createArticle() {
-      if (!user) {
-        setIsSummarizing(false);
-        return setErrorMessage("User is not authenticated.");
-      }
+      if (!user) return;
       if (!htmlString && !url) return;
 
       // begin summarizing the article
