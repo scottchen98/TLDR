@@ -2,7 +2,7 @@
   <img width="850" alt="TLDR" src="https://github.com/scottchen98/TLDR/assets/103295581/8dc64a35-9db3-424c-9c50-1f1acfa06ef9">
 </p>
 <p align="center">
-  <img width="850" alt="TLDR Demo" src="https://github.com/scottchen98/TLDR/assets/103295581/a9041b42-14ba-4f2a-9d97-70a62b813b36">
+  <img width="850" alt="TLDR Demo" src="https://github.com/scottchen98/TLDR/assets/103295581/1c7859fb-f467-48e1-80b1-951f99145b69">
 </p>
 
 # Project Overview
