@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img width="850" alt="TLDR" src="https://github.com/scottchen98/TLDR/assets/103295581/8dc64a35-9db3-424c-9c50-1f1acfa06ef9">
+</p>
+<p align="center">
+  <img width="850" alt="TLDR Demo" src="https://github.com/scottchen98/TLDR/assets/103295581/a9041b42-14ba-4f2a-9d97-70a62b813b36">
+</p>
 
-## Getting Started
+# Project Overview
 
-First, run the development server:
+TLDR is a web application designed to combat information overload by leveraging AI-powered summarization. Simply paste a webpage URL and the AI, powered by Facebook's BART model, will extract the key points and generate a concise summary in seconds, saving you time and allowing you to grasp the gist of any article instantly.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Frontend:** React, Shadcn UI \
+**Backend:** Next.js, Drizzle ORM, Turso \
+**Authentication:** Kinde \
+**AI Summarization:** BART model (Facebook) running on Edge Functions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Target Audience
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+TLDR is targeted towards anyone overwhelmed by information overload. Busy professionals, students, and anyone seeking a quick and efficient way to understand the main points of webpages will benefit from TLDR's AI-powered summaries.
 
-## Learn More
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
+### URL-based summarization
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Simply provide a URL, and TLDR takes care of the rest, eliminating the need to copy and paste potentially irrelevant text or images.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### AI-powered summaries
 
-## Deploy on Vercel
+- TLDR utilizes Facebook's BART model to generate accurate and informative summaries, capturing the webpage's essence and saving you valuable reading time.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### User Management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Sign in and manage your summarized content for easy access and reference.
+
+## Personal Motivation
+
+Like many others, I struggle with information overload online. Copying and sorting through irrelevant text on webpages is a frustrating and time-consuming process. TLDR is my solution to this frustration. I wanted to create a user-friendly tool that leverages the power of AI to streamline information gathering. By leveraging AI-powered summarization and a user-friendly interface, TLDR allows users to quickly grasp the essence of any webpage, saving them valuable time and allowing them to focus on what matters most.
